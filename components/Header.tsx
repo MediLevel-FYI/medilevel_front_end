@@ -1,6 +1,7 @@
 import React from 'react'
 import Logo from './Logo'
 import SearchBar from './SearchBar'
+import { Button } from '@/components/ui/button'
 
 type Props = {}
 
@@ -18,8 +19,8 @@ const Header = (props: Props) => {
             </form>
           </div>
           <div className="flex items-center">
-            <button className="p-2">Sign In</button>
-            <button className="p-2">Sign Up</button>
+            <Button>Sign In</Button>
+            <Button>Sign Up</Button>
           </div>
         </nav>
       </div>
