@@ -5,6 +5,7 @@ module.exports = {
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
+    'node_modules/preline/dist/*.js',
 	],
   theme: {
     container: {
@@ -71,5 +72,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("preline/plugin")
+  ],
 }
