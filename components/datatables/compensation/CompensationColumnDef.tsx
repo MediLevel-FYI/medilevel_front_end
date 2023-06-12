@@ -1,20 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Compensation = {
-  id: string
-  specialty: string
-  base_salary: number
-  hours_per_week: number
-  annual_bonus_amount: number
-  city: string
-  state: string
-  hospital_name: string
-  signed_non_compete: boolean
-}
+import { Compensation } from "@/schemas/Compensation"
 
 export const columns: ColumnDef<Compensation>[] = [
   {
@@ -22,16 +9,24 @@ export const columns: ColumnDef<Compensation>[] = [
     header: "Specialty",
   },
   {
-    accessorKey: "base_salary",
-    header: "Salary",
+    accessorKey: "yearsPostTraining",
+    header: "Years Post Training",
   },
   {
-    accessorKey: "hours_per_week",
-    header: "Hours / Week",
+    accessorKey: "baseSalary",
+    header: "Base Salary",
   },
   {
-    accessorKey: "annual_bonus_amount",
+    accessorKey: "annualBonusAmount",
     header: "Annual Bonus",
+  },
+  {
+    accessorKey: "isFullTime",
+    header: "Full-Time | Part-Time",
+  },
+  {
+    accessorKey: "hoursPerWeek",
+    header: "Hours / Week",
   },
   {
     accessorKey: "city",
@@ -46,7 +41,7 @@ export const columns: ColumnDef<Compensation>[] = [
     header: "Hospital",
   },
   {
-    accessorKey: "signed_non_compete",
-    header: "Signed Non-Compete?",
+    accessorKey: "providerGender",
+    header: "Provider's Gender",
   },
 ]
