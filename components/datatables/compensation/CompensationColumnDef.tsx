@@ -37,7 +37,7 @@ export const columns: ColumnDef<Compensation>[] = [
     header: "State",
   },
   {
-    accessorKey: "hospital_name",
+    accessorKey: "hospitalName",
     header: "Hospital",
   },
   {
