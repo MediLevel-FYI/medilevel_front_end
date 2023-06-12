@@ -1,4 +1,4 @@
-import { Compensation } from '@/schemas/Compensation'
+import { Compensation } from '@/schemas/compensationSchema'
 
 export const compensationData: Compensation[] = [
   {

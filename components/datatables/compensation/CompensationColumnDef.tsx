@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Compensation } from "@/schemas/Compensation"
+import { Compensation } from "@/schemas/compensationSchema"
 
 export const columns: ColumnDef<Compensation>[] = [
   {
