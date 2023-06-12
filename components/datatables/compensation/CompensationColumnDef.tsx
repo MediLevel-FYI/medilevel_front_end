@@ -40,8 +40,8 @@ export const columns: ColumnDef<Compensation>[] = [
     accessorKey: "hospitalName",
     header: "Hospital",
   },
-  {
-    accessorKey: "providerGender",
-    header: "Provider's Gender",
-  },
+  // {
+  //   accessorKey: "providerGender",
+  //   header: "Provider's Gender",
+  // },
 ]

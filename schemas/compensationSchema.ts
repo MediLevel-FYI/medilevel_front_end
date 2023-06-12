@@ -9,5 +9,5 @@ export type Compensation = {
   city: string
   state: string
   hospitalName: string
-  providerGender: string
+  // providerGender: string
 }
