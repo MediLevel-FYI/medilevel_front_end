@@ -11,7 +11,7 @@ export const compensationData: Compensation[] = [
     city: "New York",
     state: "NY",
     hospitalName: "ABC Hospital",
-    providerGender: "Male",
+    // providerGender: "Male",
   },
   {
     id: "2",
@@ -23,7 +23,7 @@ export const compensationData: Compensation[] = [
     city: "Los Angeles",
     state: "CA",
     hospitalName: "XYZ Medical Center",
-    providerGender: "Female",
+    // providerGender: "Female",
   },
   {
     id: "3",
@@ -36,7 +36,7 @@ export const compensationData: Compensation[] = [
     city: "Chicago",
     state: "IL",
     hospitalName: "123 Children's Hospital",
-    providerGender: "Male",
+    // providerGender: "Male",
   },
   {
     id: "4",
@@ -48,7 +48,7 @@ export const compensationData: Compensation[] = [
     city: "Miami",
     state: "FL",
     hospitalName: "Sunshine Dermatology Clinic",
-    providerGender: "Female",
+    // providerGender: "Female",
   },
   {
     id: "5",
@@ -60,7 +60,7 @@ export const compensationData: Compensation[] = [
     city: "San Francisco",
     state: "CA",
     hospitalName: "Golden State Neurological Institute",
-    providerGender: "Male",
+    // providerGender: "Male",
   },
   {
     id: "6",
@@ -73,7 +73,7 @@ export const compensationData: Compensation[] = [
     city: "Austin",
     state: "TX",
     hospitalName: "Healthy Family Clinic",
-    providerGender: "Female",
+    // providerGender: "Female",
   },
   {
     id: "7",
@@ -85,7 +85,7 @@ export const compensationData: Compensation[] = [
     city: "Boston",
     state: "MA",
     hospitalName: "Vision Care Center",
-    providerGender: "Male",
+    // providerGender: "Male",
   },
   {
     id: "8",
@@ -97,7 +97,7 @@ export const compensationData: Compensation[] = [
     city: "Seattle",
     state: "WA",
     hospitalName: "Mental Health Clinic",
-    providerGender: "Female",
+    // providerGender: "Female",
   },
   {
     id: "9",
@@ -109,7 +109,7 @@ export const compensationData: Compensation[] = [
     city: "Houston",
     state: "TX",
     hospitalName: "Surgical Center of Excellence",
-    providerGender: "Male",
+    // providerGender: "Male",
   },
   {
     id: "10",
@@ -122,6 +122,6 @@ export const compensationData: Compensation[] = [
     city: "Denver",
     state: "CO",
     hospitalName: "Women's Health Associates",
-    providerGender: "Female",
+    // providerGender: "Female",
   },
 ];

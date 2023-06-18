@@ -9,7 +9,7 @@ const Footer = (props: Props) => {
 
       <div className="text-center">
         <div>
-          <Link className="flex-none text-xl font-semibold text-black dark:text-white" href="#" aria-label="Brand">MedPay</Link>
+          <Link className="flex-none text-xl font-semibold text-black dark:text-white" href="/" aria-label="Brand">MedPay</Link>
         </div>
   
 
