@@ -23,7 +23,7 @@ const Faq = ({ faqs }: Props) => {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+      <div className="max-w-2xl mx-auto text-center mb-5 lg:mb-14">
         <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">FAQ</h2>
         <p className="mt-1 text-gray-600 dark:text-gray-400">Answers to the most frequently asked questions.</p>
       </div>
@@ -46,8 +46,8 @@ const Faq = ({ faqs }: Props) => {
                 {faq.question}
                 <svg
                   className={`${
-                    expandedIndex === index ? 'hs-accordion-active:hidden' : ''
-                  } block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400`}
+                    expandedIndex === index ? 'hidden' : ''
+                  } hs-accordion-active:block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400`}
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
