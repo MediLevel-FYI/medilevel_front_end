@@ -1,4 +1,5 @@
 import { CompensationDataTable } from "@/components/datatables/compensation/CompensationDataTable"
+import ContributeModal from "@/components/ContributeModal"
 import { columns } from "@/components/datatables/compensation/CompensationColumnDef"
 import { compensationData } from "@/_data/_compensationData"
 
@@ -24,6 +25,9 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </div>
+      <div>
+        <ContributeModal />
       </div>
       <div className="container py-10 mx-auto">
         <CompensationDataTable columns={columns} data={data} />
