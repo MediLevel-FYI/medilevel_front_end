@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 const useActiveLink = (path: string) => {
-  const router = useRouter()
+  const pathName = usePathname()
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
-    setIsActive(router.pathname === path)
-  }, [router.pathname, path]);
+    setIsActive(pathName === path)
+  }, [pathName, path]);
 
   return isActive;
 };

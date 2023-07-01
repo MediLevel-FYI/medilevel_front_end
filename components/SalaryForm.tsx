@@ -295,10 +295,18 @@ export default function SalaryForm({ closeModal }: Props) {
           />
         </div>
         <div className="flex justify-end">
+          <Button 
+            type="button"
+            variant="secondary"
+            className="px-4 py-2 mx-2 rounded-md"
+            onClick={closeModal}
+          >
+            Close
+          </Button>
           <Button
             type="submit"
             variant="default"
-            className="px-4 py-2 text-white bg-blue-600 rounded-md"
+            className="px-4 py-2 mx-2 text-white bg-blue-600 rounded-md"
           >
             Submit
           </Button>
