@@ -7,19 +7,28 @@ import ContributeModal from './ContributeModal'
 const NavLinks = () => {
   const isHomeActive = useActiveLink('/')
   const isAboutActive = useActiveLink('/about')
+  const isFaqActive = useActiveLink('/faq')
 
   return (
     <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
       <Link 
-        className={`font-medium ${isHomeActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} href="/" 
+        className={`font-medium ${isHomeActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} 
+        href="/" 
         aria-current="page"
       >
         Home
       </Link>
       <Link 
-        className={`font-medium ${isAboutActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} href="/about"
+        className={`font-medium ${isAboutActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} 
+        href="/about"
       >
         About
+      </Link>
+      <Link 
+        className={`font-medium ${isFaqActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`}
+        href="/faq"
+      >
+        FAQ
       </Link>
       <ContributeModal />
       {/* <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href="#">Salaries</Link> */}
