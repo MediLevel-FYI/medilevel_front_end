@@ -96,20 +96,49 @@ export default function SalaryForm({ closeModal }: Props) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 overflow-y-auto">
         <div className="md:grid md:grid-cols-3 md:gap-8">
-          <FormField
+        <FormField
+            control={form.control}
+            name="hospital"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Hospital</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. UW Medicine"
+                    type="text"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Hospital you currently work at.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        <FormField
             control={form.control}
             name="specialty"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Specialty</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g. Anesthesiology"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>Your medical specialty.</FormDescription>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Anesthesiology" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="anesthesiology">Anesthesiology</SelectItem>
+                    <SelectItem value="familyMedicine">Family / Internal Medicine</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  Your medical specialty.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -140,7 +169,7 @@ export default function SalaryForm({ closeModal }: Props) {
             name="baseSalary"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Base Salary</FormLabel>
+                <FormLabel>Annual Base Salary</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="$100,000"
@@ -150,7 +179,7 @@ export default function SalaryForm({ closeModal }: Props) {
                   />
                 </FormControl>
                 <FormDescription>
-                  Your base salary as a whole number.
+                  Your annual base salary as a whole number.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -206,7 +235,7 @@ export default function SalaryForm({ closeModal }: Props) {
                   </SelectContent>
                 </Select>
                 <FormDescription>
-                  Are you full time or paid hourly.
+                  Are you full time or part time?
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -268,26 +297,6 @@ export default function SalaryForm({ closeModal }: Props) {
                 </FormControl>
                 <FormDescription>
                   State of your current employer.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="hospital"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Hospital</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g. UW Medicine"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Hospital you currently work at.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
