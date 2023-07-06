@@ -23,12 +23,7 @@ const Faq = ({ faqs }: Props) => {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto text-center mb-5 lg:mb-14">
-        <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">FAQ</h2>
-        <p className="mt-1 text-gray-600 dark:text-gray-400">Answers to the most frequently asked questions.</p>
-      </div>
-
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <div className="hs-accordion-group">
           {faqs.map((faq, index) => (
             <div
@@ -39,7 +34,7 @@ const Faq = ({ faqs }: Props) => {
               key={index}
             >
               <button
-                className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-gray-800 transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
+                className="inline-flex items-center justify-between w-full pb-3 font-semibold text-left text-gray-800 transition hs-accordion-toggle group gap-x-3 md:text-lg hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
                 aria-controls={`hs-basic-with-title-and-arrow-stretched-collapse-${index}`}
                 onClick={() => toggleAccordion(index)}
               >
