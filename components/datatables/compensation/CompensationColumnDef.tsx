@@ -11,6 +11,12 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "yearsPostTraining",
     header: "Years Post Training",
+    cell: ({ row }) => {
+      const amount: number = row.getValue("yearsPostTraining")
+      const formatted = Math.round(amount)
+ 
+      return <div className="text-left">{formatted}</div>
+    }, 
   },
   {
     accessorKey: "baseSalary",
@@ -24,7 +30,7 @@ export const columns: ColumnDef<Compensation>[] = [
         maximumFractionDigits: 0,
       }).format(Math.round(amount))
  
-      return <div className="font-medium text-right">{formatted}</div>
+      return <div className="text-left">{formatted}</div>
     },
   },
   {
@@ -39,7 +45,7 @@ export const columns: ColumnDef<Compensation>[] = [
         maximumFractionDigits: 0,
       }).format(Math.round(amount))
  
-      return <div className="font-medium text-right">{formatted}</div>
+      return <div className="text-left">{formatted}</div>
     },
   },
   {

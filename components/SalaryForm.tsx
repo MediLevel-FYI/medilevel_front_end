@@ -20,6 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { states } from "@/_data/_statesArray";
+import { hospitals } from "@/_data/_hosptials";
+import { medicalSpecialties } from "@/_data/_specialties";
 
 const formSchema = z.object({
   specialty: z.string(),
@@ -52,8 +55,8 @@ const formSchema = z.object({
       message: "Enter as a whole number.",
     })
     .min(0),
-  city: z.string(),
-  state: z.string(),
+  city: z.string().regex(/^[^\d]+$/, "Must not contain numbers"),
+  state: z.string().regex(/^[^\d]+$/, "Must not contain numbers"),
   hospital: z.string(),
 });
 
@@ -109,15 +112,25 @@ export default function SalaryForm({ closeModal }: Props) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Hospital</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g. UW Medicine"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent
+                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                  >
+                    {hospitals.map(hospital => (
+                      <SelectItem key={hospital} value={hospital}>{hospital}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormDescription>
-                  Hospital you currently work at.
+                Hospital you currently work at.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -138,9 +151,12 @@ export default function SalaryForm({ closeModal }: Props) {
                       <SelectValue />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Anesthesiology">Anesthesiology</SelectItem>
-                    <SelectItem value="Family / Internal Medicine">Family / Internal Medicine</SelectItem>
+                  <SelectContent
+                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                  >
+                    {medicalSpecialties.map(specialty => (
+                      <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormDescription>
@@ -273,6 +289,8 @@ export default function SalaryForm({ closeModal }: Props) {
                   <Input
                     placeholder="e.g. Seattle"
                     type="text"
+                    pattern="^[^\d]+$"
+                    title="Must not contain numbers."
                     {...field}
                   />
                 </FormControl>
@@ -289,15 +307,25 @@ export default function SalaryForm({ closeModal }: Props) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>State</FormLabel>
-                <FormControl>
-                  <Input 
-                    placeholder="e.g. Washington"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent
+                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                  >
+                    {states.map(state => (
+                      <SelectItem key={state} value={state}>{state}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormDescription>
-                  State of your current employer.
+                State of your current employer.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
