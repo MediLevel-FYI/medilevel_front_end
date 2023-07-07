@@ -15,10 +15,32 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "baseSalary",
     header: "Base Salary",
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue("baseSalary"))
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(Math.round(amount))
+ 
+      return <div className="font-medium text-right">{formatted}</div>
+    },
   },
   {
     accessorKey: "annualBonusAmount",
     header: "Annual Bonus",
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue("annualBonusAmount"))
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }).format(Math.round(amount))
+ 
+      return <div className="font-medium text-right">{formatted}</div>
+    },
   },
   {
     accessorKey: "isFullTime",
