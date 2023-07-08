@@ -27,22 +27,20 @@ const Faq = ({ faqs }: Props) => {
         <div className="hs-accordion-group">
           {faqs.map((faq, index) => (
             <div
-              className={`hs-accordion ${expandedIndex === index ? 'hs-accordion-active:bg-gray-100' : ''} rounded-xl p-6 dark:${
-                expandedIndex === index ? 'hs-accordion-active:bg-white/[.05]' : ''
-              }`}
+              className={`hs-accordion hs-accordion-active:bg-[#012060] bg-[#012060] my-4 rounded-xl p-6 dark:${expandedIndex === index ? 'hs-accordion-active:bg-white/[.05]' : ''
+                }`}
               id={`hs-basic-with-title-and-arrow-stretched-heading-${index}`}
               key={index}
             >
               <button
-                className="inline-flex items-center justify-between w-full pb-3 font-semibold text-left text-gray-800 transition hs-accordion-toggle group gap-x-3 md:text-lg hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
+                className="inline-flex items-center justify-between w-full pb-3 font-semibold text-left text-white transition hs-accordion-toggle group gap-x-3 md:text-xl hover:text-white/70 dark:text-gray-200 dark:hover:text-gray-400"
                 aria-controls={`hs-basic-with-title-and-arrow-stretched-collapse-${index}`}
                 onClick={() => toggleAccordion(index)}
               >
                 {faq.question}
                 <svg
-                  className={`${
-                    expandedIndex === index ? 'hidden' : ''
-                  } hs-accordion-active:block w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400`}
+                  className={`${expandedIndex === index ? 'hidden' : ''
+                    } hs-accordion-active:block w-3 h-3 text-white group-hover:text-white/70 dark:text-gray-400`}
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
@@ -52,9 +50,8 @@ const Faq = ({ faqs }: Props) => {
                   <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
                 <svg
-                  className={`${
-                    expandedIndex === index ? 'hs-accordion-active:block' : 'hidden'
-                  } w-3 h-3 text-gray-600 group-hover:text-gray-500 dark:text-gray-400`}
+                  className={`${expandedIndex === index ? 'hs-accordion-active:block' : 'hidden'
+                    } w-3 h-3 text-white group-hover:text-white dark:text-gray-400`}
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
@@ -66,12 +63,13 @@ const Faq = ({ faqs }: Props) => {
               </button>
               <div
                 id={`hs-basic-with-title-and-arrow-stretched-collapse-${index}`}
-                className={`hs-accordion-content w-full overflow-hidden transition-[height] duration-300 ${
-                  expandedIndex === index ? '' : 'h-0'
-                }`}
+                className={`hs-accordion-content w-full overflow-hidden transition-[height] duration-1000 animate-accordion-up ${expandedIndex === index ? 'animate-accordion-down' : 'h-0'
+                  }`}
                 aria-labelledby={`hs-basic-with-title-and-arrow-stretched-heading-${index}`}
               >
-                <p className="text-gray-800 dark:text-gray-200">{faq.answer}</p>
+                <p className='p-3 text-gray-800 bg-white rounded-md dark:text-gray-200'>
+                  {faq.answer}
+                </p>
               </div>
             </div>
           ))}
