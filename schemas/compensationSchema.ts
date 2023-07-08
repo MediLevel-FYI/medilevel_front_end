@@ -4,7 +4,7 @@ export type Compensation = {
   yearsPostTraining: number
   baseSalary: number
   annualBonusAmount: number
-  isFullTime: boolean
+  isFullTime: string
   hoursPerWeek?: number
   city: string
   state: string

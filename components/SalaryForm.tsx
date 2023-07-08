@@ -1,6 +1,6 @@
 'use client'
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -20,6 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { states } from "@/_data/_statesArray";
+import { hospitals } from "@/_data/_hosptials";
+import { medicalSpecialties } from "@/_data/_specialties";
 
 const formSchema = z.object({
   specialty: z.string(),
@@ -44,7 +47,7 @@ const formSchema = z.object({
       message: "Enter as a whole number.",
     })
     .min(0),
-  isFullTime: z.coerce.boolean(),
+  isFullTime: z.string(),
   hoursPerWeek: z
     .coerce
     .number()
@@ -52,8 +55,8 @@ const formSchema = z.object({
       message: "Enter as a whole number.",
     })
     .min(0),
-  city: z.string(),
-  state: z.string(),
+  city: z.string().regex(/^[^\d]+$/, "Must not contain numbers"),
+  state: z.string().regex(/^[^\d]+$/, "Must not contain numbers"),
   hospital: z.string(),
 });
 
@@ -62,19 +65,26 @@ type Props = {
 }
 
 export default function SalaryForm({ closeModal }: Props) {
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       specialty: "",
-      yearsPostTraining: 0,
-      baseSalary: 0,
-      annualBonus: 0,
-      isFullTime: true,
-      hoursPerWeek: 0,
+      yearsPostTraining: undefined,
+      baseSalary: undefined,
+      annualBonus: undefined,
+      isFullTime: "",
+      hoursPerWeek: undefined,
       city: "",
       state: "",
       hospital: "",
     },
+  });
+  
+  const isFullTime = useWatch({
+    control: form.control,
+    name: "isFullTime",
+    defaultValue: "",
   });
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
@@ -102,15 +112,25 @@ export default function SalaryForm({ closeModal }: Props) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Hospital</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g. UW Medicine"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent
+                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                  >
+                    {hospitals.map(hospital => (
+                      <SelectItem key={hospital} value={hospital}>{hospital}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormDescription>
-                  Hospital you currently work at.
+                Hospital you currently work at.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -128,12 +148,15 @@ export default function SalaryForm({ closeModal }: Props) {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Anesthesiology" />
+                      <SelectValue />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="anesthesiology">Anesthesiology</SelectItem>
-                    <SelectItem value="familyMedicine">Family / Internal Medicine</SelectItem>
+                  <SelectContent
+                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                  >
+                    {medicalSpecialties.map(specialty => (
+                      <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormDescription>
@@ -172,7 +195,7 @@ export default function SalaryForm({ closeModal }: Props) {
                 <FormLabel>Annual Base Salary</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="$100,000"
+                    placeholder="e.g. $100,000"
                     type="number"
                     min={0}
                     {...field}
@@ -193,7 +216,7 @@ export default function SalaryForm({ closeModal }: Props) {
                 <FormLabel>Annual Bonus</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="$50,000"
+                    placeholder="e.g. $50,000"
                     type="number"
                     min={0}
                     {...field}
@@ -213,25 +236,17 @@ export default function SalaryForm({ closeModal }: Props) {
               <FormItem>
                 <FormLabel>Full Time / Part Time</FormLabel>
                 <Select
-                  onValueChange={(value) => {
-                    const isFullTime =
-                      value === "true"
-                        ? true
-                        : value === "false"
-                        ? false
-                        : Boolean(value);
-                    field.onChange(isFullTime);
-                  }}
-                  defaultValue={String(field.value)}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Full Time" />
+                      <SelectValue />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="true">Full Time</SelectItem>
-                    <SelectItem value="false">Part Time</SelectItem>
+                    <SelectItem value="Full Time">Full Time</SelectItem>
+                    <SelectItem value="Part Time">Part Time</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormDescription>
@@ -241,27 +256,29 @@ export default function SalaryForm({ closeModal }: Props) {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="hoursPerWeek"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Hours / Week</FormLabel>
-                <FormControl>
-                  <Input 
-                    placeholder="40"
-                    type="number"
-                    min={0}
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Hours worked per week if part time.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {isFullTime === "Part Time" && ( // Render only when "Part Time" is selected
+            <FormField
+              control={form.control}
+              name="hoursPerWeek"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Hours / Week</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="e.g. 40"
+                      type="number"
+                      min={0}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Hours worked per week if part time.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
           <FormField
             control={form.control}
             name="city"
@@ -272,6 +289,8 @@ export default function SalaryForm({ closeModal }: Props) {
                   <Input
                     placeholder="e.g. Seattle"
                     type="text"
+                    pattern="^[^\d]+$"
+                    title="Must not contain numbers."
                     {...field}
                   />
                 </FormControl>
@@ -288,15 +307,25 @@ export default function SalaryForm({ closeModal }: Props) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>State</FormLabel>
-                <FormControl>
-                  <Input 
-                    placeholder="e.g. Washington"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent
+                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                  >
+                    {states.map(state => (
+                      <SelectItem key={state} value={state}>{state}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormDescription>
-                  State of your current employer.
+                State of your current employer.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
