@@ -5,7 +5,11 @@ export const faqs = [
   },
   {
     "question": "How can I use this information?",
-    "answer": "There are a few key use cases for this data (which we’ve used personally in the technology industry): Benchmark & Baseline: Understand whether your current comp (or offer) is comparable to your market value and what your peers are being paid. Identify Opportunities: If your offer is lower than those from other institutions, you can better consider which target employers are the best fit for you, your family, and your financial goals. Strengthen your Position / Negotiate Confidently: Know whether you are being underpaid and negotiate for a higher salary."
+    "answer": [
+      "Benchmark & Baseline: Understand whether your current offer is comparable to your market value and what your peers are being paid.",
+      "Identify Opportunities: If your offer is lower than those from other institutions, you can better consider which target employers are the best fit for you, your family, and your financial goals.",
+      "Strengthen your Position / Negotiate Confidently: Inform your next compensation discussion with actual market data on fair compensation."
+    ]
   },
   {
     "question": "Is this legal?",
