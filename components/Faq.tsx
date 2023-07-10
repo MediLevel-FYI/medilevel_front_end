@@ -2,7 +2,7 @@ import React from 'react';
 
 interface QAdata {
   question: string;
-  answer: string;
+  answer: string | string[];
 }
 
 type Props = {
