@@ -4,7 +4,7 @@ export const hospitals = [
   'Swedish First Hill',
   'Swedish Cherry Hill',
   'Swedish Everett',
-  'Viginia Mason',
+  'Virginia Mason',
   'Seattle Children\'s',
   'Evergreen',
   'Overlake',

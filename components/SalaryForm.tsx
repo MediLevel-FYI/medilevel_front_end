@@ -21,12 +21,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { states } from "@/_data/_statesArray";
-import { hospitals } from "@/_data/_hosptials";
+import { hospitals } from "@/_data/_hospitals";
 import { medicalSpecialties } from "@/_data/_specialties";
 
 const formSchema = z.object({
   specialty: z.string(),
   yearsPostTraining: z
+    .coerce
+    .number()
+    .int({
+      message: "Enter as a whole number.",
+    })
+    .min(0),
+  totalCompensation: z
     .coerce
     .number()
     .int({
@@ -55,9 +62,17 @@ const formSchema = z.object({
       message: "Enter as a whole number.",
     })
     .min(0),
+  vacationWeeksAnnually: z
+    .coerce
+    .number()
+    .int({
+      message: "Enter as a whole number.",
+    })
+    .min(0),
   city: z.string().regex(/^[^\d]+$/, "Must not contain numbers"),
-  state: z.string().regex(/^[^\d]+$/, "Must not contain numbers"),
+  state: z.string(),
   hospital: z.string(),
+  providerGender: z.string(),
 });
 
 type Props = {
@@ -65,22 +80,25 @@ type Props = {
 }
 
 export default function SalaryForm({ closeModal }: Props) {
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       specialty: "",
       yearsPostTraining: undefined,
+      totalCompensation: undefined,
       baseSalary: undefined,
       annualBonus: undefined,
       isFullTime: "",
       hoursPerWeek: undefined,
+      vacationWeeksAnnually: undefined,
       city: "",
       state: "",
       hospital: "",
+      providerGender: "",
     },
   });
-  
+
   const isFullTime = useWatch({
     control: form.control,
     name: "isFullTime",
@@ -106,7 +124,7 @@ export default function SalaryForm({ closeModal }: Props) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 overflow-y-auto">
         <div className="md:grid md:grid-cols-3 md:gap-8">
-        <FormField
+          <FormField
             control={form.control}
             name="hospital"
             render={({ field }) => (
@@ -130,13 +148,13 @@ export default function SalaryForm({ closeModal }: Props) {
                   </SelectContent>
                 </Select>
                 <FormDescription>
-                Hospital you currently work at.
+                  Hospital you currently work at.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-        <FormField
+          <FormField
             control={form.control}
             name="specialty"
             render={({ field }) => (
@@ -173,7 +191,7 @@ export default function SalaryForm({ closeModal }: Props) {
               <FormItem>
                 <FormLabel>Years Post Training</FormLabel>
                 <FormControl>
-                  <Input 
+                  <Input
                     placeholder="e.g. 5"
                     type="number"
                     min={0}
@@ -182,6 +200,27 @@ export default function SalaryForm({ closeModal }: Props) {
                 </FormControl>
                 <FormDescription>
                   Number of years post residency as a whole number.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="totalCompensation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Total Compensation</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. $150,000"
+                    type="number"
+                    min={0}
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Your last year&apos;s full compensation.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -202,7 +241,7 @@ export default function SalaryForm({ closeModal }: Props) {
                   />
                 </FormControl>
                 <FormDescription>
-                  Your annual base salary as a whole number.
+                  If possible, provide your non-variable compensation.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -223,7 +262,7 @@ export default function SalaryForm({ closeModal }: Props) {
                   />
                 </FormControl>
                 <FormDescription>
-                  Your annual bonus as a whole number.
+                  If possible, provide the portion of your pay which varied, or was tied to performance.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -256,29 +295,50 @@ export default function SalaryForm({ closeModal }: Props) {
               </FormItem>
             )}
           />
-          {isFullTime === "Part Time" && ( // Render only when "Part Time" is selected
-            <FormField
-              control={form.control}
-              name="hoursPerWeek"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Hours / Week</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="e.g. 40"
-                      type="number"
-                      min={0}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Hours worked per week if part time.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
+          <FormField
+            control={form.control}
+            name="hoursPerWeek"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Hours / Week</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. 40"
+                    type="number"
+                    min={0}
+                    disabled={isFullTime !== 'Part Time'}
+                    className={isFullTime !== 'Part Time' ? 'bg-gray-200' : ''}
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Hours worked per week if part time.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="vacationWeeksAnnually"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Weeks of Vacation</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g. 4"
+                    type="number"
+                    min={0}
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Number of vacation weeks granted annually.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="city"
@@ -325,7 +385,34 @@ export default function SalaryForm({ closeModal }: Props) {
                   </SelectContent>
                 </Select>
                 <FormDescription>
-                State of your current employer.
+                  State of your current employer.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="providerGender"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Gender</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Male">Male</SelectItem>
+                    <SelectItem value="Female">Female</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  Help fight gender discrimination. This information will not be shared and is for statistical purposes only.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -333,7 +420,7 @@ export default function SalaryForm({ closeModal }: Props) {
           />
         </div>
         <div className="flex justify-end">
-          <Button 
+          <Button
             type="button"
             variant="secondary"
             className="px-4 py-2 mx-2 rounded-md"
