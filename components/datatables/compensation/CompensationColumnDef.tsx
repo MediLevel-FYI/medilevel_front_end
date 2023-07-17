@@ -14,7 +14,7 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "yearsPostTraining",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Years Post Training" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="Years Experience" />
     ),
     cell: ({ row }) => {
       const amount: number = row.getValue("yearsPostTraining")
@@ -43,7 +43,7 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "totalCompensation",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Total Compensation" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="Total Comp" />
     ),
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("totalCompensation"))
@@ -60,7 +60,7 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "baseSalary",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Base Salary" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="Yearly Base" />
     ),
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("baseSalary"))
@@ -77,7 +77,7 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "annualBonusAmount",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Annual Bonus" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="Yearly Bonus" />
     ),
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("annualBonusAmount"))
@@ -94,19 +94,19 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "isFullTime",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Full / Part Time" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="FT / PT" />
     ),
   },
   {
     accessorKey: "hoursPerWeek",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Hours / Week" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="Weekly Hours" />
     ),
   },
   {
     accessorKey: "vacationWeeksAnnually",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Weeks of Vacation" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="Weeks Vacation" />
     ),
   },
   {
