@@ -189,7 +189,7 @@ export default function SalaryForm({ closeModal }: Props) {
             name="yearsPostTraining"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Years Post Training</FormLabel>
+                <FormLabel>Years Experience</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. 5"
@@ -210,7 +210,7 @@ export default function SalaryForm({ closeModal }: Props) {
             name="totalCompensation"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Total Compensation</FormLabel>
+                <FormLabel>Total Comp</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. $150,000"
@@ -231,7 +231,7 @@ export default function SalaryForm({ closeModal }: Props) {
             name="baseSalary"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Annual Base Salary</FormLabel>
+                <FormLabel>Yearly Base Salary</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. $100,000"
@@ -252,7 +252,7 @@ export default function SalaryForm({ closeModal }: Props) {
             name="annualBonus"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Annual Bonus</FormLabel>
+                <FormLabel>Yearly Bonus</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. $50,000"
@@ -273,7 +273,7 @@ export default function SalaryForm({ closeModal }: Props) {
             name="isFullTime"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Time / Part Time</FormLabel>
+                <FormLabel>FT / PT Employment</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -300,19 +300,19 @@ export default function SalaryForm({ closeModal }: Props) {
             name="hoursPerWeek"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Hours / Week</FormLabel>
+                <FormLabel>Weekly Hours</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. 40"
                     type="number"
                     min={0}
-                    disabled={isFullTime !== 'Part Time'}
-                    className={isFullTime !== 'Part Time' ? 'bg-gray-200' : ''}
+                    // disabled={isFullTime !== 'Part Time'}
+                    // className={isFullTime !== 'Part Time' ? 'bg-gray-200' : ''}
                     {...field}
                   />
                 </FormControl>
                 <FormDescription>
-                  Hours worked per week if part time.
+                  Hours worked per week.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -323,7 +323,7 @@ export default function SalaryForm({ closeModal }: Props) {
             name="vacationWeeksAnnually"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Weeks of Vacation</FormLabel>
+                <FormLabel>Weeks Vacation</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. 4"
@@ -412,7 +412,7 @@ export default function SalaryForm({ closeModal }: Props) {
                   </SelectContent>
                 </Select>
                 <FormDescription>
-                  Help fight gender discrimination. This information will not be shared and is for statistical purposes only.
+                  This information will not be shared and is for statistical purposes only.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

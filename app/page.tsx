@@ -10,7 +10,7 @@ export default function Home() {
     <main className="flex flex-col items-center min-h-screen p-12">
       <div className="flex flex-wrap w-full pb-10 sm:justify-start sm:flex-nowrap">
         <div className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center">
-          <div className="sm:max-w-3xl">
+          <div className="">
             <p className="mb-2 text-sm font-semibold text-blue-600">
               Healthcare Provider Compensation
             </p>
@@ -18,10 +18,10 @@ export default function Home() {
               Welcome to MedPay!
             </h1>
             <p className="mt-2 text-lg text-gray-800 dark:text-gray-400">
-              Welcome to MedPay! We&apos;re here to build a free, open, and transparent database that helps you level up your earnings and even the playing field with your employers.
+              We&apos;re here to build a free, open, and transparent database that helps you level up your earnings and even the playing field with your employers.
             </p>
             <p className="mt-2 text-lg text-gray-800 dark:text-gray-400">
-              No more feeling in the dark when you&apos;re researching what you should be earning in your next contract and role. Join us now, and together let&apos;s inform your negotiations and secure the compensation you truly deserve!
+              No more feeling in the dark when you&apos;re researching what you should be earning in your next contract and role. Join us now, and together let&apos;s inform your negotiations and secure the compensation you truly deserve.
             </p>
           </div>
         </div>
