@@ -94,7 +94,7 @@ export const columns: ColumnDef<Compensation>[] = [
   {
     accessorKey: "isFullTime",
     header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="FT / PT" />
+      <DataTableColumnHeader className="font-bold text-white" column={column} title="FT/PT" />
     ),
   },
   {
