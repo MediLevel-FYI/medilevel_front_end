@@ -16,6 +16,6 @@ jobs:
       - name: Delete branch
         if: github.event.pull_request.merged == true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN_MEDIPAY }}
         run: |
           git push origin --delete ${{ github.event.pull_request.head.ref }}
