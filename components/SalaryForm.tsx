@@ -79,8 +79,7 @@ type Props = {
   closeModal: () => void
 }
 
-export default function SalaryForm({ closeModal }: Props) {
-
+export default function SalaryForm({ closeModal }: Props) {  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -140,7 +139,7 @@ export default function SalaryForm({ closeModal }: Props) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent
-                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                    className="max-h-40"
                   >
                     {hospitals.map(hospital => (
                       <SelectItem key={hospital} value={hospital}>{hospital}</SelectItem>
@@ -170,7 +169,7 @@ export default function SalaryForm({ closeModal }: Props) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent
-                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                    className="max-h-40"
                   >
                     {medicalSpecialties.map(specialty => (
                       <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
@@ -377,7 +376,7 @@ export default function SalaryForm({ closeModal }: Props) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent
-                    className="overflow-auto max-h-40 scrollbar-thin scrollbar-thumb-gray-300"
+                    className="max-h-40"
                   >
                     {states.map(state => (
                       <SelectItem key={state} value={state}>{state}</SelectItem>
