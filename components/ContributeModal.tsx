@@ -28,8 +28,8 @@ const ContributeModal = (props: Props) => {
       </div>
 
       {isModalOpen && (
-         <div className="absolute z-50 flex items-center justify-center overflow-y-scroll inset-20 sm:inset-0 md:fixed">
-          <div className="w-full max-w-xl bg-white border border-gray-300 shadow-lg dark:bg-gray-800 dark:border-gray-700 rounded-xl">
+        <div className="absolute inset-0 z-50 flex items-center justify-center md:fixed">
+          <div className="w-full max-w-xl overflow-y-scroll bg-white border border-gray-300 shadow-lg max-h-[90%] dark:bg-gray-800 dark:border-gray-700 rounded-xl scrollbar-thin scrollbar-thumb-[#012060]">
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-300 dark:border-gray-700">
               <h3 className="font-bold text-gray-800 dark:text-white">Contribute a Salary</h3>
               <button
@@ -43,7 +43,7 @@ const ContributeModal = (props: Props) => {
                 </svg>
               </button>
             </div>
-            <div className="p-4 overflow-y-auto">
+            <div className="flex flex-col flex-1 p-2">
               <SalaryForm closeModal={handleCloseModal} />
             </div>
           </div>
