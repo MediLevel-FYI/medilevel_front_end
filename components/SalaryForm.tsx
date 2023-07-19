@@ -122,8 +122,8 @@ export default function SalaryForm({ closeModal }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 overflow-y-auto">
-        <div className="md:grid md:grid-cols-3 md:gap-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <div className="grid md:grid-cols-3 md:gap-6">
           <FormField
             control={form.control}
             name="hospital"
