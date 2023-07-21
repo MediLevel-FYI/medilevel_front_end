@@ -140,11 +140,14 @@ export default function SalaryForm({ closeModal }: Props) {
                       <SelectValue />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent
-                    className="max-h-40"
-                  >
+                  <SelectContent className="max-h-40">
                     {hospitals.map(hospital => (
-                      <SelectItem key={hospital} value={hospital}>{hospital}</SelectItem>
+                      <SelectItem
+                        key={hospital}
+                        value={hospital}
+                      >
+                        {hospital}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -174,7 +177,12 @@ export default function SalaryForm({ closeModal }: Props) {
                     className="max-h-40"
                   >
                     {medicalSpecialties.map(specialty => (
-                      <SelectItem key={specialty} value={specialty}>{specialty}</SelectItem>
+                      <SelectItem
+                        key={specialty}
+                        value={specialty}
+                      >
+                        {specialty}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -285,8 +293,12 @@ export default function SalaryForm({ closeModal }: Props) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="Full Time">Full Time</SelectItem>
-                    <SelectItem value="Part Time">Part Time</SelectItem>
+                    <SelectItem value="Full Time">
+                      Full Time
+                    </SelectItem>
+                    <SelectItem value="Part Time">
+                      Part Time
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 <FormDescription>
@@ -381,7 +393,12 @@ export default function SalaryForm({ closeModal }: Props) {
                     className="max-h-40"
                   >
                     {states.map(state => (
-                      <SelectItem key={state} value={state}>{state}</SelectItem>
+                      <SelectItem
+                        key={state}
+                        value={state}
+                      >
+                        {state}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -408,8 +425,12 @@ export default function SalaryForm({ closeModal }: Props) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="Male">Male</SelectItem>
-                    <SelectItem value="Female">Female</SelectItem>
+                    <SelectItem value="Male">
+                      Male
+                    </SelectItem>
+                    <SelectItem value="Female">
+                      Female
+                    </SelectItem>
                   </SelectContent>
                 </Select>
                 <FormDescription>

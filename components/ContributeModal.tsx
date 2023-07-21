@@ -3,9 +3,7 @@ import React, { useState } from 'react';
 import useModalState from '@/hooks/useModalState';
 import SalaryForm from '@/components/SalaryForm';
 
-type Props = {};
-
-const ContributeModal = (props: Props) => {
+const ContributeModal = () => {
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModalState();
 
   return (
