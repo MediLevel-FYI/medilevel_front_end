@@ -110,12 +110,6 @@ export const columns: ColumnDef<Compensation>[] = [
     ),
   },
   {
-    accessorKey: "vacationWeeksAnnually",
-    header: ({ column }) => (
-      <DataTableColumnHeader className="font-bold text-white" column={column} title="Weeks of Vacation" />
-    ),
-  },
-  {
     accessorKey: "city",
     header: ({ column }) => (
       <DataTableColumnHeader className="font-bold text-white" column={column} title="City" />

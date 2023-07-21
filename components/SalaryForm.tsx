@@ -46,14 +46,16 @@ const formSchema = z.object({
     .int({
       message: "Enter as a whole number.",
     })
-    .min(0),
+    .min(0)
+    .optional(),
   annualBonus: z
     .coerce
     .number()
     .int({
       message: "Enter as a whole number.",
     })
-    .min(0),
+    .min(0)
+    .optional(),
   isFullTime: z.string(),
   hoursPerWeek: z
     .coerce
