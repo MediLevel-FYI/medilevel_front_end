@@ -135,7 +135,7 @@ export default function SalaryForm({ closeModal }: Props) {
       isFullTime: values.isFullTime as string,
       hoursPerWeek: values.hoursPerWeek as number,
       vacationWeeksAnnually: values.vacationWeeksAnnually as number,
-      city: values.city!.trim() as string,
+      city: values.city!.trim().toLowerCase() as string,
       state: values.state as string,
       hospital: values.hospital as string,
       providerGender: values.providerGender as string
