@@ -19,7 +19,7 @@ export const columns: ColumnDef<Compensation>[] = [
     cell: ({ row }) => {
       const amount: number = row.getValue("yearsPostTraining")
       const formattedYear = Math.round(amount)
-      
+
       const getYearRange = (year: number): string => {
         const yearMap = new Map<number, string>([
           [0, '0-3'],
@@ -36,9 +36,9 @@ export const columns: ColumnDef<Compensation>[] = [
       }
 
       const yearRange = getYearRange(formattedYear)
-      
+
       return <div className="text-left">{yearRange}</div>
-    }, 
+    },
   },
   {
     accessorKey: "totalCompensation",
@@ -53,7 +53,7 @@ export const columns: ColumnDef<Compensation>[] = [
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       }).format(Math.round(amount))
- 
+
       return <div className="text-left">{formatted}</div>
     },
   },
@@ -70,24 +70,24 @@ export const columns: ColumnDef<Compensation>[] = [
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       }).format(Math.round(amount))
- 
+
       return <div className="text-left">{formatted}</div>
     },
   },
   {
-    accessorKey: "annualBonusAmount",
+    accessorKey: "annualBonus",
     header: ({ column }) => (
       <DataTableColumnHeader className="font-bold text-white" column={column} title="Yearly Bonus" />
     ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("annualBonusAmount"))
+      const amount = parseFloat(row.getValue("annualBonus"))
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       }).format(Math.round(amount))
- 
+
       return <div className="text-left">{formatted}</div>
     },
   },
@@ -139,7 +139,7 @@ export const columns: ColumnDef<Compensation>[] = [
     ),
   },
   {
-    accessorKey: "hospitalName",
+    accessorKey: "hospital",
     header: ({ column }) => (
       <DataTableColumnHeader className="font-bold text-white" column={column} title="Hospital" />
     ),

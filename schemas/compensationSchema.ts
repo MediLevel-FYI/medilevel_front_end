@@ -3,13 +3,28 @@ export type Compensation = {
   specialty: string
   yearsPostTraining: number
   totalCompensation: number
-  baseSalary: number
-  annualBonusAmount: number
+  baseSalary?: number
+  annualBonus?: number
   isFullTime: string
-  hoursPerWeek?: number
+  hoursPerWeek: number
   vacationWeeksAnnually: number
   city: string
   state: string
-  hospitalName: string
-  // providerGender: string
+  hospital: string
+  providerGender: string
+}
+
+export type CompensationSubmission = {
+  specialty: string
+  yearsPostTraining: number
+  totalCompensation: number
+  baseSalary?: number | null
+  annualBonus?: number | null
+  isFullTime: string
+  hoursPerWeek: number
+  vacationWeeksAnnually: number
+  city: string
+  state: string
+  hospital: string
+  providerGender: string
 }

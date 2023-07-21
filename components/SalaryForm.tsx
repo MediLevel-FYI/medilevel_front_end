@@ -1,5 +1,6 @@
 'use client'
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Compensation, CompensationSubmission } from "@/schemas/compensationSchema"
 import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import {
   Select,
@@ -25,14 +26,16 @@ import { hospitals } from "@/_data/_hospitals";
 import { medicalSpecialties } from "@/_data/_specialties";
 
 const formSchema = z.object({
-  specialty: z.string(),
+  specialty: z
+    .string()
+    .nonempty("Specialty is required"),
   yearsPostTraining: z
     .coerce
     .number()
     .int({
       message: "Enter as a whole number.",
     })
-    .min(0),
+    .min(0, "Value must be greater than or equal to zero"),
   totalCompensation: z
     .coerce
     .number()
@@ -56,7 +59,9 @@ const formSchema = z.object({
     })
     .min(0)
     .optional(),
-  isFullTime: z.string(),
+  isFullTime: z
+    .string()
+    .nonempty("Full Time or Part Time employment is required."),
   hoursPerWeek: z
     .coerce
     .number()
@@ -71,18 +76,28 @@ const formSchema = z.object({
       message: "Enter as a whole number.",
     })
     .min(0),
-  city: z.string().regex(/^[^\d]+$/, "Must not contain numbers"),
-  state: z.string(),
-  hospital: z.string(),
-  providerGender: z.string(),
+  city: z
+    .string()
+    .regex(/^[^\d]+$/, "Must not contain numbers"),
+  state: z
+    .string()
+    .nonempty("State is required."),
+  hospital: z
+    .string()
+    .nonempty("Hospital is required."),
+  providerGender: z
+    .string()
+    .nonempty("Gender is required."),
 });
 
 type Props = {
   closeModal: () => void
 }
 
-export default function SalaryForm({ closeModal }: Props) {  
-  const form = useForm<z.infer<typeof formSchema>>({
+type FormValues = Partial<Omit<Compensation, 'id'>>
+
+export default function SalaryForm({ closeModal }: Props) {
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       specialty: "",
@@ -106,12 +121,26 @@ export default function SalaryForm({ closeModal }: Props) {
     defaultValue: "",
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (
+  const onSubmit: SubmitHandler<FormValues> = (
     values,
     event
   ) => {
-    event?.preventDefault()
-    console.log(values)
+    event!.preventDefault()
+    const compensationData: CompensationSubmission = {
+      specialty: values.specialty as string,
+      yearsPostTraining: values.yearsPostTraining as number,
+      totalCompensation: values.totalCompensation as number,
+      baseSalary: values.baseSalary as number || null,
+      annualBonus: values.annualBonus as number || null,
+      isFullTime: values.isFullTime as string,
+      hoursPerWeek: values.hoursPerWeek as number,
+      vacationWeeksAnnually: values.vacationWeeksAnnually as number,
+      city: values.city!.trim() as string,
+      state: values.state as string,
+      hospital: values.hospital as string,
+      providerGender: values.providerGender as string
+    };
+    console.log(compensationData)
     // Perform your asynchronous submission logic here
     // For example, make an API request
     // await submitForm(values);
