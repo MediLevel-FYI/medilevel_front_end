@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import useActiveLink from '@/hooks/useActiveLink'
+import { useToggleMenu } from '@/hooks/useToggleMenu'
 import Link from 'next/link'
 import ContributeModal from './ContributeModal'
 
@@ -8,6 +9,7 @@ const NavLinks = () => {
   const isHomeActive = useActiveLink('/')
   const isAboutActive = useActiveLink('/about')
   const isFaqActive = useActiveLink('/faq')
+  const { isMenuOpen, toggleMenu } = useToggleMenu()
 
   return (
     <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
@@ -15,18 +17,21 @@ const NavLinks = () => {
         className={`font-medium ${isHomeActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} 
         href="/" 
         aria-current="page"
+        onClick={toggleMenu}
       >
         Home
       </Link>
       <Link 
         className={`font-medium ${isAboutActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} 
         href="/about"
+        onClick={toggleMenu}
       >
         About
       </Link>
       <Link 
         className={`font-medium ${isFaqActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`}
         href="/faq"
+        onClick={toggleMenu}
       >
         FAQ
       </Link>

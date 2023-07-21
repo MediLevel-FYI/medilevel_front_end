@@ -1,22 +1,19 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 // import SearchBar from './SearchBar'
 import Image from 'next/image'
-import useActiveLink from '@/hooks/useActiveLink'
 import { useToggleMenu } from '@/hooks/useToggleMenu'
 import NavLinks from './NavLinks'
 
 const Header = () => {
-  const isHomeActive = useActiveLink('/')
-  const isAboutActive = useActiveLink('/about')
   const { isMenuOpen, toggleMenu } = useToggleMenu()
 
   return (
     <header className="z-50 flex flex-wrap w-full py-4 text-sm bg-white sm:justify-start sm:flex-nowrap dark:bg-gray-800">
       <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
         <div className="flex items-center justify-between">
-          <Link className="inline-flex items-center text-xl font-semibold gap-x-2 dark:text-white" href="/">
+          <Link className="inline-flex items-center text-xl font-semibold gap-x-2 dark:text-white" href="/" onClick={toggleMenu}>
             <Image className="rounded-full" src="/MediLevel_Logo.svg" width={40} height={40} alt="A blue cross with a superimposed trend line going up and to the right, representing the increasing compensation that is expected with increased experience in the medical profession."/>
             MedPay
           </Link>
