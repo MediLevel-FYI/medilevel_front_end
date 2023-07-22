@@ -108,7 +108,7 @@ export default function SalaryForm({ closeModal }: Props) {
     defaultValue: "",
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (
+  const onSubmit: SubmitHandler<FormValues> = async (
     values,
     event
   ) => {
@@ -127,9 +127,8 @@ export default function SalaryForm({ closeModal }: Props) {
       hospital: values.hospital as string,
       providerGender: values.providerGender as string
     };
-    console.log(compensationData)
 
-    postCompensation(compensationData)
+    await postCompensation(compensationData)
 
     // Clear the form fields
     form.reset()

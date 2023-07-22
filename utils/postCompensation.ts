@@ -1,4 +1,5 @@
 import { Compensation } from '@/schemas/compensationSchema'
+import { getAllCompensation } from './getAllCompensation';
 
 type NewCompensationSubmission = Partial<Omit<Compensation, 'id'>>
 
@@ -14,7 +15,9 @@ export const postCompensation = async (compensationData: NewCompensationSubmissi
         tags: ["compensation"]
       }
     });
-    console.log('post response', res)
+
+    await getAllCompensation();
+
   } catch (error) {
     console.error(error)
   }
