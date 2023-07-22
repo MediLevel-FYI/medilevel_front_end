@@ -24,6 +24,7 @@ import {
 import { states } from "@/_data/_statesArray";
 import { hospitals } from "@/_data/_hospitals";
 import { medicalSpecialties } from "@/_data/_specialties";
+import { postCompensation } from "@/utils/postCompensation";
 
 const formSchema = z.object({
   specialty: z
@@ -141,9 +142,8 @@ export default function SalaryForm({ closeModal }: Props) {
       providerGender: values.providerGender as string
     };
     console.log(compensationData)
-    // Perform your asynchronous submission logic here
-    // For example, make an API request
-    // await submitForm(values);
+
+    postCompensation(compensationData)
 
     // Clear the form fields
     form.reset()
