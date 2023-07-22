@@ -5,6 +5,7 @@ import { revalidateTag } from 'next/cache'
 
 export async function GET() {
   const compensations: Compensation[] = await prisma.compensation.findMany()
+  revalidateTag('compensations')
   return NextResponse.json({ compensations })
 }
 
