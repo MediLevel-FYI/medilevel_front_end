@@ -4,9 +4,13 @@ import { NextResponse } from "next/server"
 import { revalidateTag } from 'next/cache'
 
 export async function GET() {
-  const compensations: Compensation[] = await prisma.compensation.findMany()
-  revalidateTag('compensations')
-  return NextResponse.json({ compensations })
+  try {
+    const compensations: Compensation[] = await prisma.compensation.findMany()
+    revalidateTag('compensations')
+    return NextResponse.json({ compensations })
+  } catch (error) {
+    return NextResponse.json({ body: error }, { status: 500 })
+  }
 }
 
 export async function POST(req: Request) {
