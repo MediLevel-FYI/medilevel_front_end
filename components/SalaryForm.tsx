@@ -94,7 +94,7 @@ type Props = {
   closeModal: () => void
 }
 
-type FormValues = Partial<Omit<Compensation, 'id'>>
+type FormValues = CompensationSubmission
 
 export default function SalaryForm({ closeModal }: Props) {
   const form = useForm<FormValues>({
@@ -126,7 +126,7 @@ export default function SalaryForm({ closeModal }: Props) {
     event
   ) => {
     event!.preventDefault()
-    const compensationData: CompensationSubmission = {
+    const compensationData: Partial<Omit<Compensation, 'id'>> = {
       specialty: values.specialty as string,
       yearsPostTraining: values.yearsPostTraining as number,
       totalCompensation: values.totalCompensation as number,
