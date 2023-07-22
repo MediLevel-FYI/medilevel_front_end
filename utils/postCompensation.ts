@@ -14,7 +14,7 @@ export const postCompensation = async (compensationData: NewCompensationSubmissi
         tags: ["compensation"]
       }
     });
-
+    console.log('post response', res)
   } catch (error) {
     console.error(error)
   }

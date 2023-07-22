@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   try {
     const data = await req.json()
     const result = await prisma.compensation.create({
-      data: data
+      data: data.compensationData
     })
     revalidateTag('compensations')
     return NextResponse.json({ body: result }, { status: 201 })

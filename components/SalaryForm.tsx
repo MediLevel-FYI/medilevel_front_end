@@ -100,20 +100,6 @@ type FormValues = CompensationSubmission
 export default function SalaryForm({ closeModal }: Props) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      specialty: "",
-      yearsPostTraining: undefined,
-      totalCompensation: undefined,
-      baseSalary: undefined,
-      annualBonus: undefined,
-      isFullTime: "",
-      hoursPerWeek: undefined,
-      vacationWeeksAnnually: undefined,
-      city: "",
-      state: "",
-      hospital: "",
-      providerGender: "",
-    },
   });
 
   const isFullTime = useWatch({
