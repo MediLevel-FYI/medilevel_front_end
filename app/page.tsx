@@ -4,11 +4,10 @@ import ContributeModal from "@/components/ContributeModal"
 import { columns } from "@/components/datatables/compensation/CompensationColumnDef"
 import { getAllCompensation } from "@/utils/getAllCompensation"
 import { Compensation } from "@/schemas/compensationSchema"
-import useSWR from 'swr'
 
 
-export default function Home() {
-  const { data, error } = useSWR('/api/v1/compensations', getAllCompensation)
+export default async function Home() {
+  const data = await getAllCompensation() as Compensation[]
   return (
     <main className="flex flex-col items-center min-h-screen">
       <div className="flex flex-wrap w-full sm:justify-start sm:flex-nowrap">
@@ -33,8 +32,8 @@ export default function Home() {
         <ContributeModal />
       </div>
       <div className="w-full px-4 py-5 mx-auto sm:container sm:py-10">
-        {error || data === undefined ?
-          <p>Be the first to contribute!</p>
+        {data.length < 1 ?
+          <p className="text-large align-middle text-center">Be the first to contribute!</p>
           :
           <CompensationDataTable columns={columns} data={data} />
         }
