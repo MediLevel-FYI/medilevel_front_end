@@ -1,3 +1,4 @@
+'use client'
 import { CompensationDataTable } from "@/components/datatables/compensation/CompensationDataTable"
 import ContributeModal from "@/components/ContributeModal"
 import { columns } from "@/components/datatables/compensation/CompensationColumnDef"
@@ -31,7 +32,11 @@ export default async function Home() {
         <ContributeModal />
       </div>
       <div className="w-full px-4 py-5 mx-auto sm:container sm:py-10">
-        <CompensationDataTable columns={columns} data={data} />
+        {data.length > 1 ?
+          <CompensationDataTable columns={columns} data={data} />
+          :
+          <p>Be the first to contribute!</p>
+        }
       </div>
     </main>
   )
