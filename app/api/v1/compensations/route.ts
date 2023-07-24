@@ -7,7 +7,7 @@ export async function GET() {
   try {
     const compensations: Compensation[] = await prisma.compensation.findMany()
     revalidateTag('compensations')
-    return NextResponse.json({ compensations })
+    return NextResponse.json(compensations)
   } catch (error) {
     return NextResponse.json({ body: error }, { status: 500 })
   }
