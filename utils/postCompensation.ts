@@ -10,7 +10,7 @@ export const postCompensation = async (compensationData: NewCompensationSubmissi
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ compensationData }),
+      body: JSON.stringify(compensationData),
       next: {
         tags: ["compensation"]
       }
