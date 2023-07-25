@@ -9,9 +9,9 @@ export const getAllCompensation = async () => {
       }
     });
     const data = await res.json()
-    const compensation: Compensation[] = data.compensations
+    const compensations: Compensation[] = data.compensations
 
-    return compensation;
+    return compensations;
 
   } catch (error) {
     console.error(error)
