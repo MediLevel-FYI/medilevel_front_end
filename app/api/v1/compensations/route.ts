@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   try {
     const data = await req.json()
     const result = await prisma.compensation.create({
-      data: data.compensationData
+      data: data
     })
 
     revalidateTag('compensations')
