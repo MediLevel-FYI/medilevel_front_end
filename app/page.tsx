@@ -1,13 +1,15 @@
-'use client'
 import { CompensationDataTable } from "@/components/datatables/compensation/CompensationDataTable"
 import ContributeModal from "@/components/ContributeModal"
+import { compensationData } from "@/_data/_compensationData"
 import { columns } from "@/components/datatables/compensation/CompensationColumnDef"
-import { getAllCompensation } from "@/utils/getAllCompensation"
+// import { getAllCompensation } from "@/utils/getAllCompensation"
+import prismaGetAllCompensation from "@/utils/prismaGetAllCompensation"
 import { Compensation } from "@/schemas/compensationSchema"
 
 
 export default async function Home() {
-  const data = await getAllCompensation() as Compensation[]
+  // const data = await getAllCompensation() as Compensation[]
+  const data = await prismaGetAllCompensation()
   return (
     <main className="flex flex-col items-center min-h-screen">
       <div className="flex flex-wrap w-full sm:justify-start sm:flex-nowrap">
