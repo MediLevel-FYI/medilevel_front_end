@@ -1,16 +1,14 @@
 import { CompensationDataTable } from "@/components/datatables/compensation/CompensationDataTable"
 import ContributeModal from "@/components/ContributeModal"
 import { columns } from "@/components/datatables/compensation/CompensationColumnDef"
-import { compensationData } from "@/_data/_compensationData"
+import prismaGetAllCompensation from "@/utils/prismaGetAllCompensation"
 
 
-export default function Home() {
-  const data = compensationData
+export default async function Home() {
+  const data = await prismaGetAllCompensation()
   return (
     <main className="flex flex-col items-center min-h-screen">
       <div className="flex flex-wrap w-full sm:justify-start sm:flex-nowrap">
-        {/* "max-w-[85rem] px-4 py-5 sm:px-6 lg:px-8 lg:py-7 mx-auto" */}
-        {/* <div className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center"> */}
         <div className="max-w-[85rem] px-4 py-5 sm:px-6 lg:px-8 lg:py-7 mx-auto sm:flex sm:items-center">
           <div className="">
             <p className="mb-2 text-sm font-semibold text-blue-600">
@@ -32,16 +30,12 @@ export default function Home() {
         <ContributeModal />
       </div>
       <div className="w-full px-4 py-5 mx-auto sm:container sm:py-10">
-        <CompensationDataTable columns={columns} data={data} />
+        {data.length < 1 ?
+          <p className="text-large align-middle text-center">Be the first to contribute!</p>
+          :
+          <CompensationDataTable columns={columns} data={data} />
+        }
       </div>
     </main>
   )
 }
-
-// .sm\:container {
-//   width: 100%;
-//   margin-right: auto;
-//   margin-left: auto;
-//   padding-right: 2rem/* 32px */;
-//   padding-left: 2rem/* 32px */;
-// }

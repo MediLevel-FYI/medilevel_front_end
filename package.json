@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npx prisma generate && next dev",
+    "build": "npx prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "npx prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
@@ -43,6 +44,10 @@
   "devDependencies": {
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.0.0",
-    "tailwind-scrollbar": "^3.0.4"
+    "tailwind-scrollbar": "^3.0.4",
+    "ts-node": "^10.9.1"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

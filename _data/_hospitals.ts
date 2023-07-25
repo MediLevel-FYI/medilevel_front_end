@@ -1,5 +1,5 @@
 export const hospitals = [
-  'U.W. Medicine',
+  'UW Medicine',
   'VA Puget Sound Healthcare System',
   'Swedish First Hill',
   'Swedish Cherry Hill',

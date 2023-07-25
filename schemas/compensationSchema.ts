@@ -3,8 +3,8 @@ export type Compensation = {
   specialty: string
   yearsPostTraining: number
   totalCompensation: number
-  baseSalary?: number
-  annualBonus?: number
+  baseSalary: number | null
+  annualBonus: number | null
   isFullTime: string
   hoursPerWeek: number
   vacationWeeksAnnually: number
@@ -18,8 +18,8 @@ export type CompensationSubmission = {
   specialty: string
   yearsPostTraining: number
   totalCompensation: number
-  baseSalary?: number | null
-  annualBonus?: number | null
+  baseSalary?: number
+  annualBonus?: number
   isFullTime: string
   hoursPerWeek: number
   vacationWeeksAnnually: number

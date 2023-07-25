@@ -24,6 +24,7 @@ import {
 import { states } from "@/_data/_statesArray";
 import { hospitals } from "@/_data/_hospitals";
 import { medicalSpecialties } from "@/_data/_specialties";
+import { postCompensation } from "@/utils/postCompensation";
 
 const formSchema = z.object({
   specialty: z
@@ -94,25 +95,11 @@ type Props = {
   closeModal: () => void
 }
 
-type FormValues = Partial<Omit<Compensation, 'id'>>
+type FormValues = CompensationSubmission
 
 export default function SalaryForm({ closeModal }: Props) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      specialty: "",
-      yearsPostTraining: undefined,
-      totalCompensation: undefined,
-      baseSalary: undefined,
-      annualBonus: undefined,
-      isFullTime: "",
-      hoursPerWeek: undefined,
-      vacationWeeksAnnually: undefined,
-      city: "",
-      state: "",
-      hospital: "",
-      providerGender: "",
-    },
   });
 
   const isFullTime = useWatch({
@@ -121,12 +108,12 @@ export default function SalaryForm({ closeModal }: Props) {
     defaultValue: "",
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (
+  const onSubmit: SubmitHandler<FormValues> = async (
     values,
     event
   ) => {
     event!.preventDefault()
-    const compensationData: CompensationSubmission = {
+    const compensationData: Partial<Omit<Compensation, 'id'>> = {
       specialty: values.specialty as string,
       yearsPostTraining: values.yearsPostTraining as number,
       totalCompensation: values.totalCompensation as number,
@@ -135,15 +122,13 @@ export default function SalaryForm({ closeModal }: Props) {
       isFullTime: values.isFullTime as string,
       hoursPerWeek: values.hoursPerWeek as number,
       vacationWeeksAnnually: values.vacationWeeksAnnually as number,
-      city: values.city!.trim() as string,
+      city: values.city!.trim().toLowerCase() as string,
       state: values.state as string,
       hospital: values.hospital as string,
       providerGender: values.providerGender as string
     };
-    console.log(compensationData)
-    // Perform your asynchronous submission logic here
-    // For example, make an API request
-    // await submitForm(values);
+
+    await postCompensation(compensationData)
 
     // Clear the form fields
     form.reset()

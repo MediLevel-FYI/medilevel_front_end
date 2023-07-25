@@ -22,9 +22,9 @@ export const columns: ColumnDef<Compensation>[] = [
 
       const getYearRange = (year: number): string => {
         const yearMap = new Map<number, string>([
-          [0, '0-3'],
-          [4, '4-6'],
-          [7, '7-10'],
+          [3, '0-3'],
+          [6, '4-6'],
+          [10, '7-10'],
         ])
 
         for (const [rangeStart, range] of yearMap) {
@@ -63,6 +63,9 @@ export const columns: ColumnDef<Compensation>[] = [
       <DataTableColumnHeader className="font-bold text-white" column={column} title="Yearly Base" />
     ),
     cell: ({ row }) => {
+      if (!row.getValue("baseSalary")) {
+        return <div className="text-left"></div>
+      }
       const amount = parseFloat(row.getValue("baseSalary"))
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -80,6 +83,9 @@ export const columns: ColumnDef<Compensation>[] = [
       <DataTableColumnHeader className="font-bold text-white" column={column} title="Yearly Bonus" />
     ),
     cell: ({ row }) => {
+      if (!row.getValue("annualBonus")) {
+        return <div className="text-left"></div>
+      }
       const amount = parseFloat(row.getValue("annualBonus"))
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
