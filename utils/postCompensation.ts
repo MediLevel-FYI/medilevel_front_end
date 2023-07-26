@@ -1,9 +1,8 @@
 import { Compensation } from '@/schemas/compensationSchema'
-import { getAllCompensation } from './getAllCompensation';
 
 type NewCompensationSubmission = Partial<Omit<Compensation, 'id'>>
 
-export const postCompensation = async (compensationData: NewCompensationSubmission): Promise<void> => {
+export const postCompensation = async (compensationData: NewCompensationSubmission) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/compensations`, {
       method: "POST",
@@ -16,9 +15,15 @@ export const postCompensation = async (compensationData: NewCompensationSubmissi
       }
     });
 
-    await getAllCompensation();
-
+    const data = await res.json()
+    if (res.ok) {
+      return data.message
+    } else {
+      console.error(data.message)
+      throw data.message
+    }
   } catch (error) {
     console.error(error)
+    throw 'An error occurred while submitting compensation. Please try again.'
   }
 }

@@ -6,10 +6,24 @@ import { revalidateTag } from 'next/cache'
 export async function GET() {
   try {
     const compensations: Compensation[] = await prisma.compensation.findMany()
-    revalidateTag('compensations')
-    return NextResponse.json(compensations)
+
+    return NextResponse.json(
+      {
+        compensations: compensations
+      },
+      {
+        status: 200
+      }
+    )
   } catch (error) {
-    return NextResponse.json({ body: error }, { status: 500 })
+    return NextResponse.json(
+      {
+        message: error
+      },
+      {
+        status: 500
+      }
+    )
   }
 }
 
@@ -19,10 +33,25 @@ export async function POST(req: Request) {
     const result = await prisma.compensation.create({
       data: data.compensationData
     })
-    revalidateTag('compensations')
-    return NextResponse.json({ body: result }, { status: 201 })
-  } catch (error) {
-    return NextResponse.json({ body: error }, { status: 500 })
-  }
 
+    revalidateTag('compensations')
+
+    return NextResponse.json(
+      {
+        message: "Compensation submitted successfully!"
+      },
+      {
+        status: 201
+      }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: error
+      },
+      {
+        status: 500
+      }
+    )
+  }
 }

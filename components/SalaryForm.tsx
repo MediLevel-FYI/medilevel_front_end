@@ -1,4 +1,5 @@
 'use client'
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Compensation, CompensationSubmission } from "@/schemas/compensationSchema"
 import { useForm, SubmitHandler, useWatch } from "react-hook-form";
@@ -98,6 +99,11 @@ type Props = {
 type FormValues = CompensationSubmission
 
 export default function SalaryForm({ closeModal }: Props) {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
+  const [submitSuccessMessage, setSubmitSuccessMessage] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
   });
@@ -128,11 +134,19 @@ export default function SalaryForm({ closeModal }: Props) {
       providerGender: values.providerGender as string
     };
 
-    await postCompensation(compensationData)
+    setSubmitting(true);
 
-    // Clear the form fields
-    form.reset()
-    closeModal()
+    try {
+      const message = await postCompensation(compensationData)
+      setSubmitSuccess(true)
+      setSubmitSuccessMessage(message as string)
+      form.reset()
+      closeModal()
+    } catch (error) {
+      setSubmitError(error as string)
+    } finally {
+      setSubmitting(false)
+    }
   };
 
   return (
@@ -473,6 +487,16 @@ export default function SalaryForm({ closeModal }: Props) {
           </Button>
         </div>
       </form>
+      {submitSuccess && (
+        <div className="text-green-500 text-center">
+          {submitSuccessMessage}
+        </div>
+      )}
+      {submitError && (
+        <div className="text-red-500 text-center">
+          {submitError}
+        </div>
+      )}
     </Form>
   );
 }

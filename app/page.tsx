@@ -3,6 +3,7 @@ import ContributeModal from "@/components/ContributeModal"
 import { columns } from "@/components/datatables/compensation/CompensationColumnDef"
 import prismaGetAllCompensation from "@/utils/prismaGetAllCompensation"
 
+export const revalidate = 60
 
 export default async function Home() {
   const data = await prismaGetAllCompensation()
