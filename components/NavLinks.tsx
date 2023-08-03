@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import useActiveLink from '@/hooks/useActiveLink'
 import { MobileMenuContext } from '@/context/mobile-menu.context'
 import Link from 'next/link'
@@ -13,22 +13,22 @@ const NavLinks = () => {
 
   return (
     <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
-      <Link 
-        className={`font-medium ${isHomeActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} 
-        href="/" 
+      <Link
+        className={`font-medium ${isHomeActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`}
+        href="/"
         aria-current="page"
         onClick={toggleMobileMenu}
       >
         Home
       </Link>
-      <Link 
-        className={`font-medium ${isAboutActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`} 
+      <Link
+        className={`font-medium ${isAboutActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`}
         href="/about"
         onClick={toggleMobileMenu}
       >
         About
       </Link>
-      <Link 
+      <Link
         className={`font-medium ${isFaqActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`}
         href="/faq"
         onClick={toggleMobileMenu}

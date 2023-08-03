@@ -1,4 +1,3 @@
-import React from 'react'
 import Blockquote from '@/components/Blockquote'
 
 const AboutUs = () => {
@@ -6,14 +5,14 @@ const AboutUs = () => {
     <div className="max-w-2xl mx-auto">
 
       <ul className="mt-4">
-        <Blockquote 
+        <Blockquote
           quote="“When I was applying for jobs out of residency, I had to figure out whether anyone I knew was at a practice, then I had to see if they would be willing to provide me any information about how they&apos;re paid. Sharing this information is done so ad-hoc and informally - it&apos;s so hard to understand what my best options are, as far as pay, until I invest a ton of time and hopefully receive an offer.”"
         />
 
-        <Blockquote 
+        <Blockquote
           quote="“Looking at an offer from a hospital, I have no idea whether I&apos;m being paid more, less, or the same as my future colleagues. I always get the sense that they&apos;re trying to pay me as little as they need to - I wish the process was more transparent and clear.”"
         />
-        <Blockquote 
+        <Blockquote
           quote="“During COVID, I found out through conversations that new hires were being paid substantially more than the rest of the team who have been here for years, if not over a decade. Admin never felt like they had to address this - but we all talked about it behind the scenes.”"
         />
       </ul>
