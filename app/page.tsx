@@ -32,7 +32,9 @@ export default async function Home() {
       </div>
       <div className="w-full px-4 py-5 mx-auto sm:container sm:py-10">
         {data.length < 1 ?
-          <p className="text-large align-middle text-center">Be the first to contribute!</p>
+          <p className="text-center align-middle text-large">
+            Be the first to contribute!
+          </p>
           :
           <CompensationDataTable columns={columns} data={data} />
         }

@@ -1,5 +1,4 @@
 'use client'
-import React, { useState } from 'react';
 import useModalState from '@/hooks/useModalState';
 import SalaryForm from '@/components/SalaryForm';
 
@@ -22,7 +21,9 @@ const ContributeModal = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="w-full max-w-xl overflow-y-scroll bg-white border border-gray-300 shadow-lg max-h-screen md:max-h-[90%] dark:bg-gray-800 dark:border-gray-700 rounded-xl scrollbar-thin scrollbar-thumb-[#012060]">
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-300 dark:border-gray-700">
-              <h3 className="font-bold text-gray-800 dark:text-white">Contribute a Salary</h3>
+              <h3 className="font-bold text-gray-800 dark:text-white">
+                Contribute a Salary
+              </h3>
               <button
                 type="button"
                 className="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-500 transition-all rounded-md hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"

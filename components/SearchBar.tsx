@@ -3,7 +3,9 @@ type Props = {}
 const SearchBar = (props: Props) => {
   return (
     <div className="hidden mx-auto sm:block">
-      <label htmlFor="icon" className="sr-only">Search</label>
+      <label htmlFor="icon" className="sr-only">
+        Search
+      </label>
       <div className="relative">
         <div className="absolute inset-y-0 left-0 z-20 flex items-center pl-4 pointer-events-none">
           <svg className="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -11,9 +13,11 @@ const SearchBar = (props: Props) => {
           </svg>
         </div>
         <input type="text" id="icon" name="icon" className="block px-4 py-2 pr-20 text-sm text-gray-300 bg-transparent border-gray-700 rounded-md shadow-sm pl-11 w-92 md:w-96 focus:z-10 focus:border-gray-900 focus:ring-gray-600 placeholder:text-gray-500" placeholder="Search" />
-          <div className="absolute inset-y-0 right-0 z-20 flex items-center pr-4 pointer-events-none">
-            <span className="text-gray-500">Ctrl + /</span>
-          </div>
+        <div className="absolute inset-y-0 right-0 z-20 flex items-center pr-4 pointer-events-none">
+          <span className="text-gray-500">
+            Ctrl + /
+          </span>
+        </div>
       </div>
     </div>
   )

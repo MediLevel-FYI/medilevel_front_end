@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 
 type MobileMenuStateType = {
   isOpen: boolean;
