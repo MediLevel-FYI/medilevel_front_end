@@ -19,10 +19,13 @@ export default async function Home() {
               Welcome to MedPay!
             </h1>
             <p className="mt-2 text-base text-gray-800 sm:text-lg dark:text-gray-400">
-              We&apos;re here to build a free, open, and transparent database that helps you level up your earnings and even the playing field with your employers.
+              We&apos;re building a free and open database to help doctors and medical providers compare their compensation.
             </p>
             <p className="mt-2 text-base text-gray-800 sm:text-lg dark:text-gray-400">
-              No more feeling in the dark when you&apos;re researching what you should be earning in your next contract and role. Join us now, and together let&apos;s inform your negotiations and secure the compensation you truly deserve.
+              No more being in the dark when you&apos;re researching what you should be earning in your next contract and role. No more scrounging for contacts at multiple hospitals to ask how much they&apos;re paid. No more lingering doubts about your existing contract and compensation. Let&apos;s level the playing field for doctors everywhere.
+            </p>
+            <p className="mt-2 text-sm text-gray-800 sm:text-base dark:text-gray-400">
+              <em className="font-bold text-black">Note:</em> We are currently focusing on gathering data for <i className="text-gray-800 underline">Seattle-based</i> medical institutions and a limited set of specialties. We will be expanding to more geographies and specialties on an ongoing basis.
             </p>
           </div>
         </div>

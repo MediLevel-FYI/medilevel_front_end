@@ -66,7 +66,7 @@ const ContactUs = () => {
                 title: "Thank you for your message!",
                 description: (
                     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                        <code className="font-bold text-white">{JSON.stringify(data, null, 2)}</code>
+                        <code className="font-bold text-white">Thank you! We will be with you soon.</code>
                     </pre>
                 ),
             });
