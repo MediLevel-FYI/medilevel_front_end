@@ -111,11 +111,10 @@ type FormValues = Omit<CompensationSubmission, 'baseSalary' | 'annualBonus'> & {
 
 export default function SalaryForm({ closeModal }: Props) {
   const [submitting, setSubmitting] = useState(false);
-  const [selectedHospital, setSelectedHospital] = useState('')
+  const [selectedHospital, setSelectedHospital] = useState(hospitals[0])
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
 
 
   const form = useForm<FormValues>({
@@ -178,7 +177,7 @@ export default function SalaryForm({ closeModal }: Props) {
       setSubmitError(error as string)
     } finally {
       setSubmitting(false)
-      setSelectedHospital('')
+      setSelectedHospital(hospitals[0])
     }
   };
 
@@ -186,7 +185,7 @@ export default function SalaryForm({ closeModal }: Props) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
         <div className="flex flex-col space-x-2 space-y-2 md:grid md:grid-cols-3 md:space-y-1 md:gap-6">
-          {selectedHospital != "" &&
+          {selectedHospital != " " &&
             (<FormField
               control={form.control}
               name="hospital"
@@ -214,7 +213,7 @@ export default function SalaryForm({ closeModal }: Props) {
                           {hospital}
                         </SelectItem>
                       ))}
-                      <SelectItem value="" className="font-semibold text-blue-600">Other, Please Specify</SelectItem>
+                      <SelectItem value=" " className="font-semibold text-blue-600">Other, Please Specify</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormDescription>
@@ -224,7 +223,7 @@ export default function SalaryForm({ closeModal }: Props) {
                 </FormItem>
               )}
             />)}
-          {selectedHospital === "" &&
+          {selectedHospital === " " &&
             (<FormField
               control={form.control}
               name="hospital"
