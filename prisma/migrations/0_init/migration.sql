@@ -13,6 +13,9 @@ CREATE TABLE "Compensation" (
     "state" TEXT NOT NULL,
     "hospital" TEXT NOT NULL,
     "providerGender" TEXT NOT NULL,
+    "signedNonCompete" BOOLEAN,
+    "freeText" TEXT,
 
     CONSTRAINT "Compensation_pkey" PRIMARY KEY ("id")
 );
+

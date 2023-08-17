@@ -1,30 +1,19 @@
 export type Compensation = {
   id: string
   specialty: string
-  yearsPostTraining: number
-  totalCompensation: number
-  baseSalary: number | null
-  annualBonus: number | null
+  yearsPostTraining: number | string
+  totalCompensation: number | string
+  baseSalary: number | string | null
+  annualBonus: number | string | null
   isFullTime: string
-  hoursPerWeek: number
-  vacationWeeksAnnually: number
+  hoursPerWeek: number | string
+  vacationWeeksAnnually: number | string
   city: string
   state: string
   hospital: string
+  signedNonCompete: boolean
   providerGender: string
+  freeText?: string
 }
 
-export type CompensationSubmission = {
-  specialty: string
-  yearsPostTraining: number
-  totalCompensation: number
-  baseSalary?: number
-  annualBonus?: number
-  isFullTime: string
-  hoursPerWeek: number
-  vacationWeeksAnnually: number
-  city: string
-  state: string
-  hospital: string
-  providerGender: string
-}
+export type CompensationSubmission = Omit<Compensation, 'id'>

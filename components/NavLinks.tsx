@@ -35,6 +35,13 @@ const NavLinks = () => {
       >
         FAQ
       </Link>
+      <Link
+        className={`font-medium ${isFaqActive ? 'text-blue-500' : 'text-gray-600'} hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500`}
+        href="/contact"
+        onClick={toggleMobileMenu}
+      >
+        Contact Us
+      </Link>
       <ContributeModal />
       {/* <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href="#">Salaries</Link> */}
       {/* <Link className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500" href="#">Hospitals</Link> */}

@@ -3,13 +3,14 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Compensation {
-  id                    String @id @default(cuid())
+  id                    String  @id @default(cuid())
   specialty             String
   yearsPostTraining     Int
   totalCompensation     Int
@@ -22,4 +23,6 @@ model Compensation {
   state                 String
   hospital              String
   providerGender        String
+  signedNonCompete      Boolean
+  freeText              String
 }
