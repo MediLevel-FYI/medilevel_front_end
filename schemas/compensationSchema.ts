@@ -13,7 +13,7 @@ export type Compensation = {
   hospital: string
   signedNonCompete: boolean
   providerGender: string
-  freeText?: string | null
+  freeText?: string
 }
 
 export type CompensationSubmission = Omit<Compensation, 'id'>

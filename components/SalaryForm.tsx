@@ -104,7 +104,10 @@ type Props = {
   closeModal: () => void
 }
 
-type FormValues = CompensationSubmission
+type FormValues = Omit<CompensationSubmission, 'baseSalary' | 'annualBonus'> & {
+  baseSalary: string | number | undefined;
+  annualBonus: string | number | undefined;
+};
 
 export default function SalaryForm({ closeModal }: Props) {
   const [submitting, setSubmitting] = useState(false);
@@ -160,7 +163,7 @@ export default function SalaryForm({ closeModal }: Props) {
       hospital: values.hospital as string,
       signedNonCompete: values.signedNonCompete as boolean,
       providerGender: values.providerGender as string,
-      freeText: values.freeText as string || null
+      freeText: values.freeText as string,
     };
 
     setSubmitting(true);
