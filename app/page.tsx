@@ -34,13 +34,18 @@ export default async function Home() {
         <ContributeModal />
       </div>
       <div className="w-full px-4 py-5 mx-auto sm:container sm:py-10">
-        {data.length < 1 ?
-          <p className="text-center align-middle text-large">
-            Be the first to contribute!
-          </p>
-          :
+        {data.length < 1 ? (
+          <div className="text-center">
+            <p className="my-4 text-2xl font-semibold text-blue-500">
+              Be the first to contribute!
+            </p>
+            <p className="text-lg text-gray-600">
+              Help build our compensation database by contributing your info.
+            </p>
+          </div>
+        ) : (
           <CompensationDataTable columns={columns} data={data} />
-        }
+        )}
       </div>
     </main>
   )
