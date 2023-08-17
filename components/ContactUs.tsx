@@ -25,21 +25,24 @@ const ContactUs = () => {
     const emailPublicKey = process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY;
 
     const FormSchema = z.object({
-        name: z.string(),
-        email: z.string().email(),
-        message: z.string().max(1024),
+        name: z.string().default(''),
+        email: z.string().email().default(''),
+        message: z.string().max(1024).default(''),
     })
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
+        defaultValues: {
+            name: '',
+            email: '',
+            message: '',
+        },
     })
 
     const onSubmit: SubmitHandler<z.infer<typeof FormSchema>> = async (data, event) => {
         event?.preventDefault()
 
         try {
-            console.log('inside try')
-            console.log(emailServiceId)
             if (emailServiceId && emailTemplateId && emailPublicKey) {
                 emailjs
                     .send(emailServiceId, emailTemplateId, data, emailPublicKey)

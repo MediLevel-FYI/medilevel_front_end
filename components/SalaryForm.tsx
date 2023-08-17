@@ -108,13 +108,31 @@ type FormValues = CompensationSubmission
 
 export default function SalaryForm({ closeModal }: Props) {
   const [submitting, setSubmitting] = useState(false);
-  const [selectedHospital, setSelectedHospital] = useState("")
+  const [selectedHospital, setSelectedHospital] = useState('')
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      specialty: '',
+      yearsPostTraining: '',
+      totalCompensation: '',
+      baseSalary: '',
+      annualBonus: '',
+      isFullTime: '',
+      hoursPerWeek: '',
+      vacationWeeksAnnually: '',
+      city: '',
+      state: '',
+      hospital: '',
+      signedNonCompete: false,
+      providerGender: '',
+      freeText: '',
+    }
   });
 
   // const isFullTime = useWatch({
@@ -157,6 +175,7 @@ export default function SalaryForm({ closeModal }: Props) {
       setSubmitError(error as string)
     } finally {
       setSubmitting(false)
+      setSelectedHospital('')
     }
   };
 
