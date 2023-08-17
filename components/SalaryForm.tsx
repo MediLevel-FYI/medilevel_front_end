@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Compensation, CompensationSubmission } from "@/schemas/compensationSchema"
+import { CompensationSubmission } from "@/schemas/compensationSchema"
 import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import {
   Select,
@@ -26,6 +26,8 @@ import { states } from "@/_data/_statesArray";
 import { hospitals } from "@/_data/_hospitals";
 import { medicalSpecialties } from "@/_data/_specialties";
 import { postCompensation } from "@/utils/postCompensation";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea"
 
 const formSchema = z.object({
   specialty: z
@@ -87,9 +89,15 @@ const formSchema = z.object({
   hospital: z
     .string()
     .nonempty("Hospital is required."),
+  signedNonCompete: z
+    .boolean()
+    .default(false),
   providerGender: z
     .string()
     .nonempty("Gender is required."),
+  freeText: z
+    .string()
+    .optional(),
 });
 
 type Props = {
@@ -100,6 +108,7 @@ type FormValues = CompensationSubmission
 
 export default function SalaryForm({ closeModal }: Props) {
   const [submitting, setSubmitting] = useState(false);
+  const [selectedHospital, setSelectedHospital] = useState("")
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -108,18 +117,18 @@ export default function SalaryForm({ closeModal }: Props) {
     resolver: zodResolver(formSchema),
   });
 
-  const isFullTime = useWatch({
-    control: form.control,
-    name: "isFullTime",
-    defaultValue: "",
-  });
+  // const isFullTime = useWatch({
+  //   control: form.control,
+  //   name: "isFullTime",
+  //   defaultValue: "",
+  // });
 
   const onSubmit: SubmitHandler<FormValues> = async (
     values,
     event
   ) => {
     event!.preventDefault()
-    const compensationData: Partial<Omit<Compensation, 'id'>> = {
+    const compensationData: CompensationSubmission = {
       specialty: values.specialty as string,
       yearsPostTraining: values.yearsPostTraining as number,
       totalCompensation: values.totalCompensation as number,
@@ -131,7 +140,9 @@ export default function SalaryForm({ closeModal }: Props) {
       city: values.city!.trim().toLowerCase() as string,
       state: values.state as string,
       hospital: values.hospital as string,
-      providerGender: values.providerGender as string
+      signedNonCompete: values.signedNonCompete as boolean,
+      providerGender: values.providerGender as string,
+      freeText: values.freeText as string || null
     };
 
     setSubmitting(true);
@@ -151,41 +162,63 @@ export default function SalaryForm({ closeModal }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid md:grid-cols-3 md:gap-6">
-          <FormField
-            control={form.control}
-            name="hospital"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Hospital</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="">
+        <div className="flex flex-col space-x-2 space-y-2 md:grid md:grid-cols-3 md:space-y-1 md:gap-6">
+          {selectedHospital != "" &&
+            (<FormField
+              control={form.control}
+              name="hospital"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Hospital</FormLabel>
+                  <Select
+                    onValueChange={value => {
+                      field.onChange(value);
+                      setSelectedHospital(value);
+                    }}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="max-h-40">
+                      {hospitals.map(hospital => (
+                        <SelectItem
+                          key={hospital}
+                          value={hospital}
+                        >
+                          {hospital}
+                        </SelectItem>
+                      ))}
+                      <SelectItem value="" className="font-semibold text-blue-600">Other, Please Specify</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormDescription>
+                    Hospital you currently work at.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />)}
+          {selectedHospital === "" &&
+            (<FormField
+              control={form.control}
+              name="hospital"
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>Other Hospital Name</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
+                    <Input placeholder="My Hospital" type="text" {...field} />
                   </FormControl>
-                  <SelectContent className="max-h-40">
-                    {hospitals.map(hospital => (
-                      <SelectItem
-                        key={hospital}
-                        value={hospital}
-                      >
-                        {hospital}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormDescription>
-                  Hospital you currently work at.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormDescription>
+                    Your hospital name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />)}
           <FormField
             control={form.control}
             name="specialty"
@@ -468,6 +501,46 @@ export default function SalaryForm({ closeModal }: Props) {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="signedNonCompete"
+            render={({ field }) => (
+              <FormItem className="flex flex-row space-x-2 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    className=""
+                    checked={field.value === true}
+                    onCheckedChange={(isChecked) => {
+                      const newValue =
+                        isChecked === "indeterminate" ? true : isChecked;
+                      field.onChange(newValue);
+                    }}
+                  />
+                </FormControl>
+                <FormDescription className="text-slate-600">
+                  Did you have to sign a non-compete agreement?
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="freeText"
+            render={({ field }) => (
+              <FormItem className="col-span-2 pb-2">
+                <FormLabel>Comments</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Anything else you want us to know?"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         <div className="flex justify-end">
           <Button
@@ -488,12 +561,12 @@ export default function SalaryForm({ closeModal }: Props) {
         </div>
       </form>
       {submitSuccess && (
-        <div className="text-green-500 text-center">
+        <div className="text-center text-green-500">
           {submitSuccessMessage}
         </div>
       )}
       {submitError && (
-        <div className="text-red-500 text-center">
+        <div className="text-center text-red-500">
           {submitError}
         </div>
       )}

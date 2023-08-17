@@ -11,20 +11,9 @@ export type Compensation = {
   city: string
   state: string
   hospital: string
+  signedNonCompete: boolean
   providerGender: string
+  freeText?: string | null
 }
 
-export type CompensationSubmission = {
-  specialty: string
-  yearsPostTraining: number
-  totalCompensation: number
-  baseSalary?: number
-  annualBonus?: number
-  isFullTime: string
-  hoursPerWeek: number
-  vacationWeeksAnnually: number
-  city: string
-  state: string
-  hospital: string
-  providerGender: string
-}
+export type CompensationSubmission = Omit<Compensation, 'id'>
