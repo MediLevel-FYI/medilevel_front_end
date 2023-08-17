@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { MobileMenuContextProvider } from '@/context/mobile-menu.context'
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,13 +17,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  
+
   return (
     <html lang="en">
       <body className={`${inter.className} scrollbar-thin scrollbar-thumb-[#012060]`}>
         <MobileMenuContextProvider>
           <Header />
           {children}
+          <Toaster />
           <Footer />
         </MobileMenuContextProvider>
       </body>
