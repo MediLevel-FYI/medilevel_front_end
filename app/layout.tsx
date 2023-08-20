@@ -4,6 +4,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { MobileMenuContextProvider } from '@/context/mobile-menu.context'
 import { Toaster } from "@/components/ui/toaster"
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <Toaster />
           <Footer />
         </MobileMenuContextProvider>
+        <Analytics />
       </body>
     </html>
   )
