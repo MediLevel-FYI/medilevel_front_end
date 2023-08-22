@@ -39,14 +39,17 @@ const formSchema = z.object({
     .int({
       message: "Enter as a whole number.",
     })
-    .min(0, "Value must be greater than or equal to zero"),
+    .min(0, "Value must be greater than or equal to zero")
+    .max(70),
   totalCompensation: z
     .coerce
     .number()
     .int({
       message: "Enter as a whole number.",
     })
-    .min(0),
+    .min(0)
+    .max(2000000)
+  ,
   baseSalary: z
     .coerce
     .number()
@@ -54,6 +57,7 @@ const formSchema = z.object({
       message: "Enter as a whole number.",
     })
     .min(0)
+    .max(1000000)
     .optional(),
   annualBonus: z
     .coerce
@@ -62,6 +66,7 @@ const formSchema = z.object({
       message: "Enter as a whole number.",
     })
     .min(0)
+    .max(1000000)
     .optional(),
   isFullTime: z
     .string()
@@ -72,14 +77,17 @@ const formSchema = z.object({
     .int({
       message: "Enter as a whole number.",
     })
-    .min(0),
+    .min(0)
+    .max(100),
   vacationWeeksAnnually: z
     .coerce
     .number()
     .int({
       message: "Enter as a whole number.",
     })
-    .min(0),
+    .min(0)
+    .max(12)
+  ,
   city: z
     .string()
     .regex(/^[^\d]+$/, "Must not contain numbers"),
@@ -97,6 +105,7 @@ const formSchema = z.object({
     .nonempty("Gender is required."),
   freeText: z
     .string()
+    .max(1000)
     .optional(),
 });
 
@@ -512,6 +521,9 @@ export default function SalaryForm({ closeModal }: Props) {
                     </SelectItem>
                     <SelectItem value="Female">
                       Female
+                    </SelectItem>
+                    <SelectItem value="Non-Binary">
+                      Non-Binary
                     </SelectItem>
                   </SelectContent>
                 </Select>
