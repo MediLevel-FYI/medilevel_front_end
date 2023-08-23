@@ -27,7 +27,9 @@ import { hospitals } from "@/_data/_hospitals";
 import { medicalSpecialties } from "@/_data/_specialties";
 import { postCompensation } from "@/utils/postCompensation";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
 const formSchema = z.object({
   specialty: z
@@ -124,7 +126,7 @@ export default function SalaryForm({ closeModal }: Props) {
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
   const [submitSuccessMessage, setSubmitSuccessMessage] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
+  const { toast } = useToast();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -181,8 +183,20 @@ export default function SalaryForm({ closeModal }: Props) {
       setSubmitSuccess(true)
       setSubmitSuccessMessage(message as string)
       form.reset()
+      toast({
+        title: "Thank you for your submission!",
+        description: "Your contribution will be added to the database and show shortly.",
+        duration: 3000,
+      });
       closeModal()
     } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your submission.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        duration: 5000,
+      });
       setSubmitError(error as string)
     } finally {
       setSubmitting(false)
